@@ -1,5 +1,7 @@
 class Admin::ProductsController < ApplicationController
 
+    layout "admin"
+
     before_action :authenticate_user!
     before_action :admin_required
 
@@ -14,6 +16,11 @@ class Admin::ProductsController < ApplicationController
 
     def edit
         @product = Product.find(params[:id])
+        if @product.photo.present?
+            @photo = @product.photo
+        else
+            @photo = @product.build_photo
+        end
     end
 
     def update
@@ -31,7 +38,7 @@ class Admin::ProductsController < ApplicationController
 	@product = Product.new(product_params)
 
 	if @product.save
-	    redirct_to admin_products_path
+	    redirect_to admin_products_path
 	else
 	    render :new
 	end
