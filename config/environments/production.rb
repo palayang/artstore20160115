@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'xxxx.herokuapp.com' } # 你的 heroku app 網址
+  config.action_mailer.default_url_options = { host: 'boiling-cove-37492.herokuapp.com' } # 你的 heroku app 網址
 
 
   config.after_initialize do
