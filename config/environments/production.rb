@@ -81,7 +81,7 @@ Rails.application.configure do
 
 
   config.after_initialize do
-    Pay2go.integration_mode = :development
+    Pay2go.integration_mode = :production
   end
 
   config.action_mailer.delivery_method = :smtp
@@ -90,7 +90,7 @@ Rails.application.configure do
     address:        "smtp.mailgun.org",
     user_name:      ENV["mailgun_user"],
     password:       ENV["mailgun_secret"],
-    domain:         "sandbox一堆亂碼.mailgun.org", # 你的 mailgun domain name
+    domain:         "sandbox2c624f1e27384341915b42068e12a5ff.mailgun.org", # 你的 mailgun domain name
 
     authentication: :plain,
   }
