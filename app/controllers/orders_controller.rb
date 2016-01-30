@@ -12,7 +12,7 @@ protect_from_forgery except: :pay2go_cc_notify
       @order.calculate_total!(current_cart)
       current_cart.clean!
 
-      OrderMailer.notify_order_placed(@order).deliver!
+      #OrderMailer.notify_order_placed(@order).deliver!
 
       redirect_to order_path(@order.token)
     else
