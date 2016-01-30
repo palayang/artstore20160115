@@ -81,7 +81,7 @@ Rails.application.configure do
 
 
   config.after_initialize do
-    Pay2go.integration_mode = :production
+    Pay2go.integration_mode = :development
   end
 
   config.action_mailer.delivery_method = :smtp
