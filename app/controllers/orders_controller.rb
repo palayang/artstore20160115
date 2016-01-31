@@ -1,19 +1,19 @@
 class OrdersController < ApplicationController
 before_action :authenticate_user!
-before_action :authenticate_user!, except: :pay2go_cc_notify
+before_action :authenticate_user!, except: [:pay2go_cc_notify, :pay2go_atm_complete]
 
-protect_from_forgery except: :pay2go_cc_notify
+protect_from_forgery except: [:pay2go_cc_notify, :pay2go_atm_complete]
 
   def create
     @order = current_user.orders.build(order_params)
 
     if @order.save
-      @order.build_item_cache_from_cart(current_cart)
-      @order.calculate_total!(current_cart)
-      current_cart.clean!
+      #@order.build_item_cache_from_cart(current_cart)
+      #@order.calculate_total!(current_cart)
+      #current_cart.clean!
 
-      OrderMailer.notify_order_placed(@order).deliver!
-      #OrderPlacingService.new(current_cart, @order).place_order!
+      #OrderMailer.notify_order_placed(@order).deliver!
+      OrderPlacingService.new(current_cart, @order).place_order!
       
       redirect_to order_path(@order.token)
     else
@@ -52,6 +52,22 @@ if params["Status"] == "SUCCESS"
       render text: "交易失敗"
     end
 end
+
+  def pay2go_atm_complete
+    @order = Order.find_by_token(params[:id])
+
+    json_data = JSON.parse(params["JSONData"])
+
+    if json_data["Status"] == "SUCCESS"
+
+      @order.set_payment_with!("atm")
+      @order.make_payment!
+
+      render text: "交易成功"
+    else
+      render text: "交易失敗"
+    end
+  end
 
   private
 
