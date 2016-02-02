@@ -90,7 +90,7 @@ Rails.application.configure do
     address:        "smtp.mailgun.org",
     user_name:      ENV["mailgun_user"],
     password:       ENV["mailgun_secret"],
-    domain:         "sandbox2c624f1e27384341915b42068e12a5ff.mailgun.org", # 你的 mailgun domain name
+    domain:         "sandbox2c624f1e27384341915b42068e12a5ff.mailgun.org",
 
     authentication: :plain,
   }
