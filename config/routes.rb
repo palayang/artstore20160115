@@ -1,28 +1,28 @@
 Rails.application.routes.draw do
-  devise_for :users
+    devise_for :users
     namespace :admin do
-	  resources :products do
-      member do
-        post :add_to_cart
+      resources :products do
+        member do
+          post :add_to_cart
+        end
+      end
+      resources :orders do
+        member do
+          post :cancel
+          post :ship
+          post :shipped
+          post :return
+        end  
+      end
+      resources :users do
+        member do
+          post :to_admin
+          post :to_normal
+        end
       end
     end
-       resources :orders do
-          member do
-            post :cancel
-            post :ship
-            post :shipped
-            post :return
-          end
-        end
-       resources :users do
-          member do
-            post :to_admin
-            post :to_normal
-          end
-        end
-    end
 
-resources :items, controller: "cart_items"
+    resources :items, controller: "cart_items"
 
     resources :products do
       member do

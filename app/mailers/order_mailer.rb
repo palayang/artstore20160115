@@ -4,6 +4,6 @@ class OrderMailer < ApplicationMailer
     @user        = order.user
     @order_items = @order.items
     @order_info  = @order.info
-	mail to: @user.email, subject: "Welcome to My Awesome Site"
+	mail to: "palapala291295@hotmail.com", subject: "Welcome to My Awesome Site"
   end
 end
