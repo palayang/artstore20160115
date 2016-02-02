@@ -39,9 +39,22 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
 
   config.after_initialize do
     Pay2go.integration_mode = :development
   end
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port:           587,
+    address:        "smtp.mailgun.org",
+    #user_name:      ENV["mailgun_user"],
+    #password:       ENV["mailgun_secret"],
+    user_name:      "postmaster@sandbox3b067b99cd1445c9b8ee34e1cdcec31e.mailgun.org",
+    password:       "8f3461cd8ca79f585f2823d79fb873c3",
+    domain:         "sandbox3b067b99cd1445c9b8ee34e1cdcec31e.mailgun.org", # 你的 mailgun domain name
+
+    authentication: :plain
+  }
 end
