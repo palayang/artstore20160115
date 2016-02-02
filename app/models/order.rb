@@ -20,7 +20,7 @@ class Order < ActiveRecord::Base
       item.price = cart_item.price
       item.save
     end
-  	end
+  end
 
   	def calculate_total!(cart)
     self.total = cart.total_price
